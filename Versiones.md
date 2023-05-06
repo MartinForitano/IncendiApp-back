@@ -1,3 +1,6 @@
+PARA ACCEDER A LA DOCUMENTACION DEL PROYECTO
+-> localhost:8080/
+
 Versiones:
 
 0.0.1: Version inicial - Proyecto vacio
@@ -13,3 +16,7 @@ Versiones:
 			Mejorada la organizacion del proyecto
 			Agregados getters / setters para Evento
 			Agregadas querys personalizadas para Usuarios y Eventos (en el repositorio se encuentran)
+0.0.4: Nuevo:
+			Controlador para Usuario con sus respectivos metodos de A/B/M y LogIn (este ultimo debe probarse si o si en Postman)
+			Documentacion mejorada
+			

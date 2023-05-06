@@ -1,5 +1,7 @@
 package org.unse.usuarios.servicio;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.unse.usuarios.entidad.Usuario;
@@ -18,7 +20,7 @@ public class UsuarioServicio {
 	 */
 	public Integer altaUsuario(Usuario u) {
 		if (u.getId() == null) {
-			if (repositorio.buscarPorNombre(u.getNombre()) == null) {
+			if (repositorio.buscarPorNombre(u.getNombre()).isEmpty()) {
 				repositorio.save(u);
 				return 1;
 			} else {
@@ -34,10 +36,10 @@ public class UsuarioServicio {
 	 * el usuario existe y la contraseña es incorrecta. 3 Si el usuario no existe.
 	 */
 
-	public Integer logIn(Usuario u) {
-		Usuario uDb = repositorio.buscarPorNombre(u.getNombre());
-		if (uDb != null) {
-			if (u.getContrasenia() == uDb.getContrasenia()) {
+	public Integer ingresar(Usuario u) {
+		Optional<Usuario> uDb = repositorio.buscarPorNombre(u.getNombre());
+		if (uDb.isPresent()) {
+			if (u.getContrasenia().equals(uDb.get().getContrasenia())) {
 				return 1;
 			} else {
 				return 2;
@@ -54,10 +56,10 @@ public class UsuarioServicio {
 	 */
 
 	public Integer borrarUsuario(Usuario u) {
-		Usuario uDb = repositorio.buscarPorNombre(u.getNombre());
-		if (uDb != null) {
-			if (u.getContrasenia() == uDb.getContrasenia()) {
-				repositorio.delete(uDb);
+		Optional<Usuario> uDb = repositorio.buscarPorNombre(u.getNombre());
+		if (uDb.isPresent()) {
+			if (u.getContrasenia().equals(uDb.get().getContrasenia())) {
+				repositorio.delete(uDb.get());
 				return 1;
 			} else {
 				return 2;
@@ -73,9 +75,9 @@ public class UsuarioServicio {
 	 */
 
 	public Integer cambiarContraseniaUsuario(Usuario u) {
-		Usuario uDb = repositorio.buscarPorNombre(u.getNombre());
-		uDb.setContrasenia(u.getContrasenia());
-		repositorio.save(uDb);
+		Optional<Usuario> uDb = repositorio.buscarPorNombre(u.getNombre());
+		uDb.get().setContrasenia(u.getContrasenia());
+		repositorio.save(uDb.get());
 		return 1;
 	}
 }

@@ -23,27 +23,27 @@ public class EventoServicio {
 
 	/*
 	 * Devuelve una lista con todos los eventos 
-	 * Recibe 1 string indicando zona, otro indicando el tipo, 1 fecha inicio y otra fecha fin
+	 * Recibe 1 string indicando ubicacionEvento, otro indicando el tipo, 1 fecha inicio y otra fecha fin
 	 */
 
-	public List<Evento> listaEventoFiltrada(String zona, String tipo, LocalDateTime fechaInicio,
+	public List<Evento> listaEventoFiltrada(String ubicacionEvento, String tipo, LocalDateTime fechaInicio,
 			LocalDateTime fechaFin) {
 		if (fechaInicio == null && fechaFin == null) {
-			if (zona.trim() == "" && tipo.trim() != "") {
+			if (ubicacionEvento.trim() == "" && tipo.trim() != "") {
 				return buscarPorTipoSinFecha(tipo);
 			} else {
-				if (zona.trim() != "" && tipo.trim() == "") {
-					return buscarPorZonaSinFecha(zona);
+				if (ubicacionEvento.trim() != "" && tipo.trim() == "") {
+					return buscarPorUbicacionSinFecha(ubicacionEvento);
 				} else {
 					return listaEventosGral();
 				}
 			}
 		} else {
-			if (zona.trim() == "" && tipo.trim() != "") {
+			if (ubicacionEvento.trim() == "" && tipo.trim() != "") {
 				return buscarPorTipoConFechas(tipo, fechaInicio, fechaFin);
 			} else {
-				if (zona.trim() != "" && tipo.trim() == "") {
-					return buscarPorZonaConFechas(zona, fechaInicio, fechaFin);
+				if (ubicacionEvento.trim() != "" && tipo.trim() == "") {
+					return buscarPorUbicacionConFechas(ubicacionEvento, fechaInicio, fechaFin);
 				} else {
 					return buscarPorFechas(fechaInicio, fechaFin);
 				}
@@ -55,15 +55,15 @@ public class EventoServicio {
 		return repositorio.buscarPorTipoSinFecha(tipo);
 	}
 
-	private List<Evento> buscarPorZonaSinFecha(String zona) {
-		return repositorio.buscarPorZonaSinFecha(zona);
+	private List<Evento> buscarPorUbicacionSinFecha(String zona) {
+		return repositorio.buscarPorUbicacionSinFecha(zona);
 	}
 
 	private List<Evento> buscarPorTipoConFechas(String tipo, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
 		return repositorio.buscarPorTipoConFecha(tipo, fechaInicio, fechaFin);
 	}
 
-	private List<Evento> buscarPorZonaConFechas(String zona, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+	private List<Evento> buscarPorUbicacionConFechas(String zona, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
 		return repositorio.buscarPorTipoConFecha(zona, fechaInicio, fechaFin);
 	}
 

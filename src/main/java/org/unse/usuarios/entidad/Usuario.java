@@ -15,17 +15,20 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private String nombre;
-	
 	private String contrasenia;
+	
+	private String nombre;
 
-	public Usuario(Long id, String nombre, String contrasenia) {
+	public Usuario(Long id, String contrasenia, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.contrasenia = contrasenia;
 	}
-
+	
+	public Usuario() {
+	}
+	
 	public Long getId() {
 		return id;
 	}
