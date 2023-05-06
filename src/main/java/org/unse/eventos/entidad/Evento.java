@@ -42,7 +42,85 @@ public class Evento {
 		this.ubiLatitud = ubiLatitud;
 		this.ubiLongitud = ubiLongitud;
 	}
-	
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public Integer getCantVictimas() {
+		return cantVictimas;
+	}
+
+	public void setCantVictimas(Integer cantVictimas) {
+		this.cantVictimas = cantVictimas;
+	}
+
+	public String[] getAutoridades() {
+		return autoridades;
+	}
+
+	public void setAutoridades(String[] autoridades) {
+		this.autoridades = autoridades;
+	}
+
+	public String getAreaInfluencia() {
+		return areaInfluencia;
+	}
+
+	public void setAreaInfluencia(String areaInfluencia) {
+		this.areaInfluencia = areaInfluencia;
+	}
+
+	public String getUbicacionEvento() {
+		return ubicacionEvento;
+	}
+
+	public void setUbicacionEvento(String ubicacionEvento) {
+		this.ubicacionEvento = ubicacionEvento;
+	}
+
+	public LocalDateTime getTiempoInicio() {
+		return tiempoInicio;
+	}
+
+	public void setTiempoInicio(LocalDateTime tiempoInicio) {
+		this.tiempoInicio = tiempoInicio;
+	}
+
+	public LocalDateTime getTiempoFin() {
+		return tiempoFin;
+	}
+
+	public void setTiempoFin(LocalDateTime tiempoFin) {
+		this.tiempoFin = tiempoFin;
+	}
+
+	public String getUbiLatitud() {
+		return ubiLatitud;
+	}
+
+	public void setUbiLatitud(String ubiLatitud) {
+		this.ubiLatitud = ubiLatitud;
+	}
+
+	public String getUbiLongitud() {
+		return ubiLongitud;
+	}
+
+	public void setUbiLongitud(String ubiLongitud) {
+		this.ubiLongitud = ubiLongitud;
+	}
+		
 }
