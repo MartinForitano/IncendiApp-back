@@ -109,7 +109,7 @@ public class UsuarioControlador {
 
 	@Bean
 	public OpenAPI openApiConfiguration() {
-		return new OpenAPI().info(new Info().title("IncendiApp - Usuario").version("0.0.4")
+		return new OpenAPI().info(new Info().title("IncendiApp - Usuario").version("0.0.4-1")
 				.description("IncendiApp API documentation using Open APi y Spring Doc")
 				.termsOfService("http:/swagger.io/terms/")
 				.license(new License().name("MIT / Apache 2.0").url("http://springdoc.org"))
