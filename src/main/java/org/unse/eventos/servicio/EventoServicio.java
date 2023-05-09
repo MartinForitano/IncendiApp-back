@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.unse.eventos.entidad.Evento;
 import org.unse.eventos.repositorio.EventosRepositorio;
 
+@Service
 public class EventoServicio {
 
 	@Autowired
@@ -35,7 +37,7 @@ public class EventoServicio {
 				if (ubicacionEvento.trim() != "" && tipo.trim() == "") {
 					return buscarPorUbicacionSinFecha(ubicacionEvento);
 				} else {
-					return listaEventosGral();
+					return buscarPorUbicacionYTipo(ubicacionEvento, tipo);
 				}
 			}
 		} else {
@@ -51,6 +53,10 @@ public class EventoServicio {
 		}
 	}
 
+	private List<Evento> buscarPorUbicacionYTipo(String ubicacion, String tipo){
+		return buscarPorUbicacionYTipo(ubicacion, tipo);
+	}
+	
 	private List<Evento> buscarPorTipoSinFecha(String tipo) {
 		return repositorio.buscarPorTipoSinFecha(tipo);
 	}
@@ -108,7 +114,7 @@ public class EventoServicio {
 	 * 2 Si el evento no existe.
 	 */
 
-	public Integer cambiarContraseniaUsuario(Evento e) {
+	public Integer cambiarDatosEvento(Evento e) {
 		Optional<Evento> eDb = repositorio.findById(e.getId());
 		if (eDb.isPresent()) {
 			eDb.get().setAreaInfluencia(e.getAreaInfluencia());
@@ -121,9 +127,9 @@ public class EventoServicio {
 			eDb.get().setUbiLatitud(e.getUbiLatitud());
 			eDb.get().setUbiLongitud(e.getUbiLongitud());
 			repositorio.save(eDb.get());
+			return 1;
 		}else {
 			return 2;
 		}
-		return 1;
 	}
 }

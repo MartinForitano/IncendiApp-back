@@ -42,6 +42,10 @@ public class Evento {
 		this.ubiLatitud = ubiLatitud;
 		this.ubiLongitud = ubiLongitud;
 	}
+	
+	public Evento() {
+		
+	}
 
 	public Long getId() {
 		return id;

@@ -21,7 +21,6 @@ import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 
-@Configuration
 @RestController
 public class UsuarioControlador {
 
@@ -37,7 +36,7 @@ public class UsuarioControlador {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Log In exitoso"),
 			@ApiResponse(responseCode = "400", description = "Contraseña incorrecta"),
 			@ApiResponse(responseCode = "404", description = "Usuario inexistente") })
-	@GetMapping(produces = "application/json", consumes = "application/json", path = "/login/")
+	@GetMapping(produces = "application/json", consumes = "application/json", path = "/login")
 	public ResponseEntity<Usuario> login(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario") @RequestBody Usuario u) {
 		switch (servicio.ingresar(u)) {
@@ -103,18 +102,4 @@ public class UsuarioControlador {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
-	
-
-	
-
-	@Bean
-	public OpenAPI openApiConfiguration() {
-		return new OpenAPI().info(new Info().title("IncendiApp - Usuario").version("0.0.4-1")
-				.description("IncendiApp API documentation using Open APi y Spring Doc")
-				.termsOfService("http:/swagger.io/terms/")
-				.license(new License().name("MIT / Apache 2.0").url("http://springdoc.org"))
-				.contact(new Contact().name("Martin Tomas Foritano").email("martin.foritano.11@gmail.com")
-						.url("https://www.linkedin.com/in/martin-tomas-foritano-609303153/")));
-	}
-
 }
