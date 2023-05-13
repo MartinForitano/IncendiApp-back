@@ -1,8 +1,6 @@
 package org.unse.usuarios.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +14,6 @@ import org.unse.usuarios.servicio.UsuarioServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Contact;
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
 
 @RestController
 public class UsuarioControlador {
@@ -32,11 +26,11 @@ public class UsuarioControlador {
 	public UsuarioControlador() {
 	}
 
-	@Operation(summary = "LogIn", description = "Chequeo de datos para Log In", tags = "GET")
+	@Operation(summary = "LogIn usuario", description = "Chequeo de datos para Log In", tags = "POST")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Log In exitoso"),
 			@ApiResponse(responseCode = "400", description = "Contraseña incorrecta"),
 			@ApiResponse(responseCode = "404", description = "Usuario inexistente") })
-	@GetMapping(produces = "application/json", consumes = "application/json", path = "/login")
+	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/login")
 	public ResponseEntity<Usuario> login(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario") @RequestBody Usuario u) {
 		switch (servicio.ingresar(u)) {
@@ -55,7 +49,7 @@ public class UsuarioControlador {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Usuario cargado"),
 			@ApiResponse(responseCode = "400", description = "El usuario ya existe"),
 			@ApiResponse(responseCode = "500", description = "Error interno del servidor") })
-	@PostMapping(produces = "application/json", consumes = "application/json", path = "/altausuario")
+	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/alta")
 	public ResponseEntity<Usuario> altaUsuario(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario a registrar") @RequestBody Usuario u) {
 		switch (servicio.altaUsuario(u)) {
@@ -74,7 +68,7 @@ public class UsuarioControlador {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Usuario eliminado"),
 			@ApiResponse(responseCode = "400", description = "Contraseña incorrecta"),
 			@ApiResponse(responseCode = "404", description = "Usuario inexistente") })
-	@DeleteMapping(produces = "application/json", consumes = "application/json", path = "/bajausuario")
+	@DeleteMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/baja/")
 	public ResponseEntity<Usuario> bajaUsuario(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario a eliminar") @RequestBody Usuario u) {
 		switch (servicio.borrarUsuario(u)) {
@@ -92,7 +86,7 @@ public class UsuarioControlador {
 	@Operation(summary = "Cambio de contraseña", description = "Cambio de contraseña de un usuario", tags = "PUT")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Contraseña cambiada"),
 			@ApiResponse(responseCode = "500", description = "Error interno del servidor")})
-	@PutMapping(produces = "application/json", consumes = "application/json", path = "/contraseniausuario")
+	@PutMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/actualizar/contrasenia")
 	public ResponseEntity<Usuario> cambiarContraseniaUsuario(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario para cambiar contraseña") @RequestBody Usuario u) {
 		switch (servicio.cambiarContraseniaUsuario(u)) {

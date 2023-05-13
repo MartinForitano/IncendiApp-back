@@ -3,7 +3,9 @@ PARA ACCEDER A LA DOCUMENTACION DEL PROYECTO
 
 Versiones:
 
-0.0.1: Version inicial - Proyecto vacio
+0.0.1: Version inicial:
+	
+			 Proyecto vacio
 
 0.0.2: Nuevo:
 
@@ -31,3 +33,8 @@ Versiones:
 			Controlador para Eventos, con sus respectivos metodos de A/B/M
 			Correccion de errores varios
 			
+0.0.6: Correccion:
+			
+			Cambiado endpoint "LogIn" GET -> POST (mitigado el error que causaba al probarlo en Swagger)
+			Cambiado y organizado las direcciones de cada endpoint de usuarios y eventos
+			Cambiado el titulo de la documentacion en Swagger			

@@ -31,14 +31,14 @@ public class EventoControlador {
 
 	@Operation(summary = "Listado general", description = "Listado general de eventos", tags = "GET")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Se encontraron eventos") })
-	@GetMapping(produces = "application/json", path = "/eventos/listadoeventos")
+	@GetMapping(produces = "application/json", path = "/eventos/listado/general")
 	public ResponseEntity<List<Evento>> listaEventos() {
 		return ResponseEntity.ok(servicio.listaEventosGral());
 	}
 
 	@Operation(summary = "Listado con filtro", description = "Listado de eventos con filtro", tags = "GET")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Se encontraron eventos") })
-	@GetMapping(produces = "application/json", path = "/eventos/listadoeventosconfiltro")
+	@GetMapping(produces = "application/json", path = "/eventos/listado/filtrado")
 	public ResponseEntity<List<Evento>> listaEventosFiltrado(
 			@Parameter(description = "Ubicacion del evento") @PathVariable String ubiEvento,
 			@Parameter(description = "Tipo de evento") @PathVariable String tipo,
@@ -50,7 +50,7 @@ public class EventoControlador {
 	@Operation(summary = "Alta de evento", description = "Alta de los datos de un evento", tags = "POST")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Evento cargado"),
 			@ApiResponse(responseCode = "400", description = "No se debe cargar un evento con id") })
-	@PostMapping(produces = "application/json", consumes = "application/json", path = "/eventos/altaevento")
+	@PostMapping(produces = "application/json", consumes = "application/json", path = "/eventos/alta/")
 	public ResponseEntity<Evento> altaEvento(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del evento a registrar") @RequestBody Evento e) {
 		switch (servicio.altaEvento(e)) {
@@ -66,7 +66,7 @@ public class EventoControlador {
 	@Operation(summary = "Baja de evento", description = "Borrar datos de un evento usando su ID", tags = "DELETE")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Evento borrado"),
 			@ApiResponse(responseCode = "404", description = "Evento no existente") })
-	@DeleteMapping("/eventos/{id}")
+	@DeleteMapping("/eventos/baja/{id}")
 	public ResponseEntity<Evento> bajaEvento(@Parameter(description = "ID del evento a borrar") @PathVariable Long id) {
 		if (servicio.borrarEvento(id) == 1) {
 			return ResponseEntity.ok().build();
@@ -78,7 +78,7 @@ public class EventoControlador {
 	@Operation(summary = "Cambio de datos de evento", description = "Cambio en los datos de un evento especifico", tags = "PUT")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Datos actualizados"),
 			@ApiResponse(responseCode = "404", description = "Evento no encontrado")})
-	@PutMapping(produces = "application/json", consumes = "application/json", path = "/eventos/actualizarevento")
+	@PutMapping(produces = "application/json", consumes = "application/json", path = "/eventos/actualizacion/")
 	public ResponseEntity<Usuario> cambiarContraseniaUsuario(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del evento para actualizar") @RequestBody Evento e) {
 		switch (servicio.cambiarDatosEvento(e)) {
