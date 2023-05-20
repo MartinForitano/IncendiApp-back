@@ -37,4 +37,8 @@ Versiones:
 			
 			Cambiado endpoint "LogIn" GET -> POST (mitigado el error que causaba al probarlo en Swagger)
 			Cambiado y organizado las direcciones de cada endpoint de usuarios y eventos
-			Cambiado el titulo de la documentacion en Swagger			
+			Cambiado el titulo de la documentacion en Swagger	
+
+0.0.6-1: Nuevo:
+
+			Agregado Spring Security, con Basic authentication usando "admin//admin"		
