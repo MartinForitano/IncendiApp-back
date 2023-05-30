@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.unse.usuarios.entidad.DTOusuario;
 import org.unse.usuarios.entidad.Usuario;
 import org.unse.usuarios.servicio.UsuarioServicio;
 
@@ -26,33 +27,14 @@ public class UsuarioControlador {
 	public UsuarioControlador() {
 	}
 
-	@Operation(summary = "LogIn usuario", description = "Chequeo de datos para Log In", tags = "POST")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Log In exitoso"),
-			@ApiResponse(responseCode = "400", description = "Contraseña incorrecta"),
-			@ApiResponse(responseCode = "404", description = "Usuario inexistente") })
-	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/login")
-	public ResponseEntity<Usuario> login(
-			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario") @RequestBody Usuario u) {
-		switch (servicio.ingresar(u)) {
-		case 1:
-			return ResponseEntity.ok().build();
-		case 2:
-			return ResponseEntity.badRequest().build();
-		case 3:
-			return ResponseEntity.notFound().build();
-		default:
-			return ResponseEntity.internalServerError().build();
-		}
-	}
-
 	@Operation(summary = "Alta de usuario", description = "Alta de los datos de un usuario", tags = "POST")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Usuario cargado"),
 			@ApiResponse(responseCode = "400", description = "El usuario ya existe"),
 			@ApiResponse(responseCode = "500", description = "Error interno del servidor") })
 	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/alta")
 	public ResponseEntity<Usuario> altaUsuario(
-			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario a registrar") @RequestBody Usuario u) {
-		switch (servicio.altaUsuario(u)) {
+			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario a registrar") @RequestBody DTOusuario u) {
+		switch (servicio.altaUsuario(new Usuario(null, u.getContrasenia(), u.getNombre()))) {
 		case 1:
 			return ResponseEntity.ok().build();
 		case 2:
@@ -70,8 +52,8 @@ public class UsuarioControlador {
 			@ApiResponse(responseCode = "404", description = "Usuario inexistente") })
 	@DeleteMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/baja/")
 	public ResponseEntity<Usuario> bajaUsuario(
-			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario a eliminar") @RequestBody Usuario u) {
-		switch (servicio.borrarUsuario(u)) {
+			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario a eliminar") @RequestBody DTOusuario u) {
+		switch (servicio.borrarUsuario(new Usuario(null, u.getContrasenia(), u.getNombre()))) {
 		case 1:
 			return ResponseEntity.ok().build();
 		case 2:
@@ -88,8 +70,8 @@ public class UsuarioControlador {
 			@ApiResponse(responseCode = "500", description = "Error interno del servidor")})
 	@PutMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/actualizar/contrasenia")
 	public ResponseEntity<Usuario> cambiarContraseniaUsuario(
-			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario para cambiar contraseña") @RequestBody Usuario u) {
-		switch (servicio.cambiarContraseniaUsuario(u)) {
+			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario para cambiar contraseña") @RequestBody DTOusuario u) {
+		switch (servicio.cambiarContraseniaUsuario(new Usuario(null, u.getContrasenia(), u.getNombre()))) {
 		case 1:
 			return ResponseEntity.ok().build();
 		default:

@@ -41,4 +41,8 @@ Versiones:
 
 0.0.6-1: Nuevo:
 
-			Agregado Spring Security, con Basic authentication usando "admin//admin"		
+			Agregado Spring Security, con Basic authentication usando "admin//admin"
+			
+0.0.6-2: Nuevo:
+		
+			Agregado autenticacion/autorizacion con JWT		

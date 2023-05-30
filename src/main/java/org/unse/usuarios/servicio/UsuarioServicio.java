@@ -3,6 +3,7 @@ package org.unse.usuarios.servicio;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.unse.usuarios.entidad.Usuario;
 import org.unse.usuarios.repositorio.UsuarioRepositorio;
@@ -21,25 +22,9 @@ public class UsuarioServicio {
 	public Integer altaUsuario(Usuario u) {
 		if (u.getId() == null) {
 			if (repositorio.buscarPorNombre(u.getNombre()).isEmpty()) {
+				BCryptPasswordEncoder encryptador = new BCryptPasswordEncoder();
+				u.setContrasenia(encryptador.encode(u.getContrasenia()));
 				repositorio.save(u);
-				return 1;
-			} else {
-				return 2;
-			}
-		} else {
-			return 3;
-		}
-	}
-
-	/*
-	 * RETORNA un entero: 1 Si el usuario existe y es la contraseña correcta. 2 Si
-	 * el usuario existe y la contraseña es incorrecta. 3 Si el usuario no existe.
-	 */
-
-	public Integer ingresar(Usuario u) {
-		Optional<Usuario> uDb = repositorio.buscarPorNombre(u.getNombre());
-		if (uDb.isPresent()) {
-			if (u.getContrasenia().equals(uDb.get().getContrasenia())) {
 				return 1;
 			} else {
 				return 2;
@@ -75,8 +60,9 @@ public class UsuarioServicio {
 	 */
 
 	public Integer cambiarContraseniaUsuario(Usuario u) {
+		BCryptPasswordEncoder encryptador = new BCryptPasswordEncoder();
 		Optional<Usuario> uDb = repositorio.buscarPorNombre(u.getNombre());
-		uDb.get().setContrasenia(u.getContrasenia());
+		uDb.get().setContrasenia(encryptador.encode(u.getContrasenia()));
 		repositorio.save(uDb.get());
 		return 1;
 	}
