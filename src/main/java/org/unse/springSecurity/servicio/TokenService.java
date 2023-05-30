@@ -19,7 +19,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 public class TokenService {
 
 	public String generarToken(Usuario usuario) throws JWTCreationException {
-		Algorithm algorithm = Algorithm.HMAC256(generarClaveSecreta()); // deberia ser encriptada
+		Algorithm algorithm = Algorithm.HMAC256("123456"); // deberia ser encriptada
 		String token = JWT.create().withIssuer("Fori") // persona/empresa que emitio el JWT
 				.withSubject(usuario.getNombre()) // nombre usuario
 				.withClaim("id", usuario.getId()) // por si acaso se pide el id de usuario
@@ -31,9 +31,9 @@ public class TokenService {
 		return LocalDateTime.now().plusHours(10).toInstant(ZoneOffset.of("-03:00"));
 	}
 
-	private String generarClaveSecreta() {
-		return new BCryptPasswordEncoder().encode("123456");
-	}
+// 	private String generarClaveSecreta() {
+// 		return new BCryptPasswordEncoder().encode("123456");
+// 	}
 
 	public String getSubject(String token) {
 		DecodedJWT verifier = null;
@@ -41,7 +41,7 @@ public class TokenService {
 			throw new RuntimeException("Token invalido");
 		}
 		try {
-			Algorithm algorithm = Algorithm.HMAC256(generarClaveSecreta());
+			Algorithm algorithm = Algorithm.HMAC256("123456");
 			verifier = JWT.require(algorithm)
 					.withIssuer("Fori")
 					.build()
