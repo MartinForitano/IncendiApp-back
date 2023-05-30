@@ -45,4 +45,9 @@ Versiones:
 			
 0.0.6-2: Nuevo:
 		
-			Agregado autenticacion/autorizacion con JWT		
+			Agregado autenticacion/autorizacion con JWT
+			Quitado: Usuario admin//admin			
+			
+0.0.7: Correccion:
+
+			Corregido errores con JWT		

@@ -3,9 +3,7 @@ package org.unse.springSecurity.servicio;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.unse.usuarios.entidad.Usuario;
 
@@ -18,8 +16,11 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 @Service
 public class TokenService {
 
+	@Value("${incendiapp.secret.key}")
+	private String secretKey; 
+	
 	public String generarToken(Usuario usuario) throws JWTCreationException {
-		Algorithm algorithm = Algorithm.HMAC256("123456"); // deberia ser encriptada
+		Algorithm algorithm = Algorithm.HMAC256(secretKey); // deberia ser encriptada
 		String token = JWT.create().withIssuer("Fori") // persona/empresa que emitio el JWT
 				.withSubject(usuario.getNombre()) // nombre usuario
 				.withClaim("id", usuario.getId()) // por si acaso se pide el id de usuario
@@ -31,6 +32,8 @@ public class TokenService {
 		return LocalDateTime.now().plusHours(10).toInstant(ZoneOffset.of("-03:00"));
 	}
 
+	
+//	No es necesario, ya el algoritmo hmac 256 ya encripta la clave secreta
 // 	private String generarClaveSecreta() {
 // 		return new BCryptPasswordEncoder().encode("123456");
 // 	}
@@ -41,7 +44,7 @@ public class TokenService {
 			throw new RuntimeException("Token invalido");
 		}
 		try {
-			Algorithm algorithm = Algorithm.HMAC256("123456");
+			Algorithm algorithm = Algorithm.HMAC256(secretKey);
 			verifier = JWT.require(algorithm)
 					.withIssuer("Fori")
 					.build()
