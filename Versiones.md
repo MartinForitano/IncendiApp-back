@@ -51,7 +51,6 @@ Versiones:
 0.0.7: Correccion:
 
 			Corregido errores con JWT
-			0.0.7: Correccion:
 
 0.0.8: Nuevo:
 
