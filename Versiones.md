@@ -55,4 +55,5 @@ Versiones:
 0.0.8: Nuevo:
 
 			Añadido archivo .bat para crear la base de datos (usuario root, contraseña root, puerto 3306)
+			Para crear las tablas, ejecutar el proyecto
 			Para probar autenticacion / autorizacion utilizar PostMan, opcion "Bearer token" una vez obtenido del metodo 			"/usuarios/login/" 		

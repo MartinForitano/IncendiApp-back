@@ -8,9 +8,11 @@ goto :MENU
 
 :CONTINUAR
 echo Importando la base de datos...
-mysql -uroot -root -hlocalhost -P3306 -e"SET GLOBAL log_bin_trust_function_creators = 1"
-mysql -uroot -root -hlocalhost -P3306 -e"DROP DATABASE incendiapp"
-mysql -uroot -root -hlocalhost -P3306 -e"CREATE SCHEMA incendiapp"
+cd C:\Program Files\MySQL\MySQL Server 5.7\bin
+mysql -uroot -proot -hlocalhost -P3306 -e"SET GLOBAL log_bin_trust_function_creators = 1"
+mysql.exe -uroot -proot -hlocalhost -P3306 -e"DROP DATABASE incendiapp"
+mysql.exe -uroot -proot -hlocalhost -P3306 -e"CREATE SCHEMA incendiapp"
+echo Para cargar las tablas, ejecutar el proyecto
 echo Importacion finalizada
 pause
 exit
