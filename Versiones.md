@@ -1,5 +1,5 @@
 PARA ACCEDER A LA DOCUMENTACION DEL PROYECTO
--> localhost:8080/
+-> localhost:8080/documentacion/
 
 Versiones:
 
@@ -50,4 +50,10 @@ Versiones:
 			
 0.0.7: Correccion:
 
-			Corregido errores con JWT		
+			Corregido errores con JWT
+			0.0.7: Correccion:
+
+0.0.8: Nuevo:
+
+			Añadido archivo .bat para crear la base de datos (usuario root, contraseña root, puerto 3306)
+			Para probar autenticacion / autorizacion utilizar PostMan, opcion "Bearer token" una vez obtenido del metodo 			"/usuarios/login/" 		
