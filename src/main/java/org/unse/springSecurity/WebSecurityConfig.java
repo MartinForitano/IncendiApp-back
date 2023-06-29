@@ -29,7 +29,7 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests()
 				.requestMatchers(HttpMethod.POST, "/usuarios/login")
 				.permitAll()
-				.requestMatchers(HttpMethod.POST, "/usuarios/alta")
+				.requestMatchers(HttpMethod.POST, "/usuarios/alta/")
 				.permitAll()
 				.requestMatchers(HttpMethod.PUT, "/usuarios/actualizar/contrasenia")
 				.permitAll()

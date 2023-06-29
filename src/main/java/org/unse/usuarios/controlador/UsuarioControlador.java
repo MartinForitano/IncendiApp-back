@@ -31,7 +31,7 @@ public class UsuarioControlador {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Usuario cargado"),
 			@ApiResponse(responseCode = "400", description = "El usuario ya existe"),
 			@ApiResponse(responseCode = "500", description = "Error interno del servidor") })
-	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/alta")
+	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/alta/")
 	public ResponseEntity<Usuario> altaUsuario(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario a registrar") @RequestBody DTOusuario u) {
 		switch (servicio.altaUsuario(new Usuario(null, u.getContrasenia(), u.getNombre()))) {
