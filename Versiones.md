@@ -60,4 +60,8 @@ Versiones:
 			
 0.0.9: Correccion:
 
-			Path de creacion de usuarios cambiada a "localhost:8080/usuarios/alta/" ya que RetroFit pide "/" al 			final de cada URL 		
+			Path de creacion de usuarios cambiada a "localhost:8080/usuarios/alta/" ya que RetroFit pide "/" al 			final de cada URL
+			
+0.0.10: Correccion:
+
+			Path de login de usuarios cambiada a "localhost:8080/usuarios/login/" ya que RetroFit pide "/" al 			final de cada URL  		
