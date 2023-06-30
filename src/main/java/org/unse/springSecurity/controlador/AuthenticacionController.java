@@ -32,7 +32,7 @@ public class AuthenticacionController {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Log In exitoso"),
 			@ApiResponse(responseCode = "400", description = "Contraseña incorrecta"),
 			@ApiResponse(responseCode = "404", description = "Usuario inexistente") })
-	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/login")
+	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/login/")
 	public ResponseEntity<DTOToken> login(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario") @RequestBody datosLogin u) {
 		return autenticarUsuario(new Usuario(null, u.getContrasenia(), u.getNombre()));
