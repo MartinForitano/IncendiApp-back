@@ -64,4 +64,8 @@ Versiones:
 			
 0.0.10: Correccion:
 
-			Path de login de usuarios cambiada a "localhost:8080/usuarios/login/" ya que RetroFit pide "/" al 			final de cada URL  		
+			Path de login de usuarios cambiada a "localhost:8080/usuarios/login/" ya que RetroFit pide "/" al 			final de cada URL
+			
+0.0.11: Nuevo:
+
+			Agregado metodo para desencriptar la contraseña enviada por el front.

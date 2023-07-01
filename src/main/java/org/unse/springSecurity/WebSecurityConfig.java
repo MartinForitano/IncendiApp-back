@@ -27,7 +27,7 @@ public class WebSecurityConfig {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 				.authorizeHttpRequests()
-				.requestMatchers(HttpMethod.POST, "/usuarios/login")
+				.requestMatchers(HttpMethod.POST, "/usuarios/login/")
 				.permitAll()
 				.requestMatchers(HttpMethod.POST, "/usuarios/alta/")
 				.permitAll()
