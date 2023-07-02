@@ -51,6 +51,7 @@ public class AuthenticacionController {
 
 	public ResponseEntity<DTOToken> autenticarUsuario(Usuario usuario) {
 		usuario.setContrasenia(desencriptarContrasenia(usuario.getContrasenia()));
+		usuario.setNombre(desencriptarContrasenia(usuario.getNombre()));
 		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(usuario.getNombre(),
 				usuario.getContrasenia());
 		Authentication usuarioAutenticado = authenticationManager.authenticate(authToken);

@@ -69,3 +69,4 @@ Versiones:
 0.0.11: Nuevo:
 
 			Agregado metodo para desencriptar la contraseña enviada por el front.
+			Agregado metodo para desencriptar el nombre enviado por el front.
