@@ -68,7 +68,7 @@ public class UsuarioControlador {
 	@Operation(summary = "Cambio de contraseña", description = "Cambio de contraseña de un usuario", tags = "PUT")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Contraseña cambiada"),
 			@ApiResponse(responseCode = "500", description = "Error interno del servidor")})
-	@PutMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/actualizar/contrasenia")
+	@PutMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/actualizar/contrasenia/")
 	public ResponseEntity<Usuario> cambiarContraseniaUsuario(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario para cambiar contraseña") @RequestBody DTOusuario u) {
 		switch (servicio.cambiarContraseniaUsuario(new Usuario(null, u.getContrasenia(), u.getNombre()))) {
