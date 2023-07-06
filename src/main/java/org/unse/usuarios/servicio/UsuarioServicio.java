@@ -1,6 +1,15 @@
 package org.unse.usuarios.servicio;
 
+import java.security.MessageDigest;
+import java.security.SecureRandom;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Optional;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,10 +69,60 @@ public class UsuarioServicio {
 	 */
 
 	public Integer cambiarContraseniaUsuario(Usuario u) {
+		u.setContrasenia(desencriptarContrasenia(u.getContrasenia()));
+		u.setNombre(desencriptarContrasenia(u.getNombre()));
 		BCryptPasswordEncoder encryptador = new BCryptPasswordEncoder();
 		Optional<Usuario> uDb = repositorio.buscarPorNombre(u.getNombre());
 		uDb.get().setContrasenia(encryptador.encode(u.getContrasenia()));
 		repositorio.save(uDb.get());
 		return 1;
 	}
-}
+	
+	private String desencriptarContrasenia(String contrasenia) {
+		String llave = "ClavePasajeContraseña";
+		return desencriptar(llave, contrasenia);
+	}
+
+	private String desencriptar(String llave, String contrasenia) {
+		try {
+			SecretKeySpec keySpec = crearClave(llave);
+			Cipher cipher = Cipher.getInstance("AES");
+			cipher.init(Cipher.DECRYPT_MODE, keySpec);
+			byte[] cadena = Base64.getDecoder().decode(contrasenia);
+			byte[] desencriptacion = cipher.doFinal(cadena);
+			return new String(desencriptacion, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private SecretKeySpec crearClave(String llave) {
+		try {
+			byte[] cadena = llave.getBytes();
+			MessageDigest mDigest = MessageDigest.getInstance("SHA-1");
+			cadena = mDigest.digest(cadena);
+			cadena = Arrays.copyOf(cadena, 16);
+			SecretKeySpec keySpec = new SecretKeySpec(cadena, "AES");
+			return keySpec;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	private SecretKey crearLlave() {
+        try {
+            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+            SecureRandom random = new SecureRandom(); // cryptograph. secure random
+            keyGen.init(random);
+            SecretKey secretKey = keyGen.generateKey();
+            return secretKey;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+	
+	}

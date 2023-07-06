@@ -70,3 +70,7 @@ Versiones:
 
 			Agregado metodo para desencriptar la contraseña enviada por el front.
 			Agregado metodo para desencriptar el nombre enviado por el front.
+			
+0.0.12: Correccion:
+
+			Cambiado el metodo para cambiar contraseña para aceptar datos encriptados
