@@ -31,7 +31,7 @@ public class EventoControlador {
 
 	@Operation(summary = "Listado general", description = "Listado general de eventos", tags = "GET")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Se encontraron eventos") })
-	@GetMapping(produces = "application/json", path = "/eventos/listado/general")
+	@GetMapping(produces = "application/json", path = "/eventos/listado/general/")
 	public ResponseEntity<List<Evento>> listaEventos() {
 		return ResponseEntity.ok(servicio.listaEventosGral());
 	}

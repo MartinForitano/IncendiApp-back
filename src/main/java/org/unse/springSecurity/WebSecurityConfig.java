@@ -33,7 +33,7 @@ public class WebSecurityConfig {
 				.permitAll()
 				.requestMatchers(HttpMethod.PUT, "/usuarios/actualizar/contrasenia/")
 				.permitAll()
-				.requestMatchers(HttpMethod.GET, "/eventos/listado/general")
+				.requestMatchers(HttpMethod.GET, "/eventos/listado/general/")
 				.permitAll()
 				.requestMatchers(HttpMethod.GET, "/eventos/listado/filtrado")
 				.permitAll()
