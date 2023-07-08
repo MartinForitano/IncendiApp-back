@@ -74,3 +74,7 @@ Versiones:
 0.0.12: Correccion:
 
 			Cambiado el metodo para cambiar contraseña para aceptar datos encriptados
+			
+0.0.13: Correccion:
+
+			Cambiado el metodo de listado de listado general de eventos

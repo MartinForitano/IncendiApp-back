@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.unse.eventos.entidad.DTOListadoGeneral;
 import org.unse.eventos.entidad.Evento;
 import org.unse.eventos.servicio.EventoServicio;
 import org.unse.usuarios.entidad.Usuario;
@@ -32,7 +33,7 @@ public class EventoControlador {
 	@Operation(summary = "Listado general", description = "Listado general de eventos", tags = "GET")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Se encontraron eventos") })
 	@GetMapping(produces = "application/json", path = "/eventos/listado/general/")
-	public ResponseEntity<List<Evento>> listaEventos() {
+	public ResponseEntity<DTOListadoGeneral> listaEventos() {
 		return ResponseEntity.ok(servicio.listaEventosGral());
 	}
 

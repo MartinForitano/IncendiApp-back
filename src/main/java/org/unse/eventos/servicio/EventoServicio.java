@@ -1,11 +1,16 @@
 package org.unse.eventos.servicio;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.unse.eventos.entidad.DTOEVentoResponse;
+import org.unse.eventos.entidad.DTOListadoGeneral;
 import org.unse.eventos.entidad.Evento;
 import org.unse.eventos.repositorio.EventosRepositorio;
 
@@ -19,8 +24,19 @@ public class EventoServicio {
 	 * Devuelve una lista con todos los eventos
 	 */
 
-	public List<Evento> listaEventosGral() {
-		return repositorio.findAll();
+	public DTOListadoGeneral listaEventosGral() {
+		DTOListadoGeneral respuesta;
+		DTOEVentoResponse e;
+		List<DTOEVentoResponse> listaEventosRespuesta = new ArrayList<>();
+		List<Evento> listaGralVanilla = repositorio.findAll();
+		for (int i = 0; i < listaGralVanilla.size(); i++) {
+			Date TI =  new Date(listaGralVanilla.get(i).getTiempoInicio().getYear(), listaGralVanilla.get(i).getTiempoInicio().getMonthValue(), listaGralVanilla.get(i).getTiempoInicio().getDayOfMonth(), listaGralVanilla.get(i).getTiempoInicio().getHour(), listaGralVanilla.get(i).getTiempoInicio().getMinute());
+			Date TF = new Date(listaGralVanilla.get(i).getTiempoFin().getYear(), listaGralVanilla.get(i).getTiempoFin().getMonthValue(), listaGralVanilla.get(i).getTiempoFin().getDayOfMonth(), listaGralVanilla.get(i).getTiempoFin().getHour(), listaGralVanilla.get(i).getTiempoFin().getMinute());
+			e = new DTOEVentoResponse(listaGralVanilla.get(i).getId(), listaGralVanilla.get(i).getTipo() , listaGralVanilla.get(i).getCantVictimas(), listaGralVanilla.get(i).getAutoridades(), listaGralVanilla.get(i).getAreaInfluencia(), listaGralVanilla.get(i).getUbicacionEvento(), TI.getTime(), TF.getTime(), listaGralVanilla.get(i).getUbiLatitud(), listaGralVanilla.get(i).getUbiLongitud());
+			listaEventosRespuesta.add(e);
+		}
+		respuesta = new DTOListadoGeneral("Ok", listaEventosRespuesta);
+		return respuesta;
 	}
 
 	/*
