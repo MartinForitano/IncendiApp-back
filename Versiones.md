@@ -73,8 +73,12 @@ Versiones:
 			
 0.0.12: Correccion:
 
-			Cambiado el metodo para cambiar contraseña para aceptar datos encriptados
+			Cambiado el metodo para cambiar contraseña para aceptar datos encriptados.
 			
 0.0.13: Correccion:
 
-			Cambiado el metodo de listado de listado general de eventos
+			Cambiado el metodo de listado de listado general de eventos.
+			
+0.0.14: Nuevo:
+
+			Creado metodo para devolver datos de un evento en controlador de eventos.

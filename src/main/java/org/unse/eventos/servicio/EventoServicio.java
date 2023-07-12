@@ -148,4 +148,15 @@ public class EventoServicio {
 			return 2;
 		}
 	}
+
+	public DTOEVentoResponse buscarEvento(Long idEvento) {
+		DTOEVentoResponse response;
+		Optional<Evento> eDb = repositorio.findById(idEvento);
+		if (eDb.isPresent()) {
+			response = new DTOEVentoResponse(eDb.get().getId(), eDb.get().getTipo(), eDb.get().getCantVictimas(), eDb.get().getAutoridades(), eDb.get().getAreaInfluencia(), eDb.get().getUbicacionEvento(), new Date(eDb.get().getTiempoInicio().getYear(), eDb.get().getTiempoInicio().getMonthValue(), eDb.get().getTiempoInicio().getDayOfMonth(), eDb.get().getTiempoInicio().getHour(), eDb.get().getTiempoInicio().getMinute()).getTime(), new Date(eDb.get().getTiempoFin().getYear(), eDb.get().getTiempoFin().getMonthValue(), eDb.get().getTiempoFin().getDayOfMonth(), eDb.get().getTiempoFin().getHour(), eDb.get().getTiempoFin().getMinute()).getTime(), eDb.get().getUbiLatitud(), eDb.get().getUbiLongitud());
+			return response;
+		}else {
+			return null;
+		}
+	}
 }

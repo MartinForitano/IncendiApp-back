@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.unse.eventos.entidad.DTOEVentoResponse;
 import org.unse.eventos.entidad.DTOListadoGeneral;
 import org.unse.eventos.entidad.Evento;
 import org.unse.eventos.servicio.EventoServicio;
@@ -91,5 +92,15 @@ public class EventoControlador {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
+	
+	@Operation(summary = "Recuperar evento", description = "Recuperar un evento con id", tags = "GET")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Se encontraron eventos") })
+	@GetMapping(produces = "application/json", path = "/eventos/{id}")
+	public ResponseEntity<DTOEVentoResponse> recuperarEvento(
+			@Parameter(description = "Id del evento") @PathVariable Long idEvento) {
+		return ResponseEntity.ok(servicio.buscarEvento(idEvento));
+	}
+	
+	
 	
 }
