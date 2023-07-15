@@ -95,10 +95,10 @@ public class EventoControlador {
 	
 	@Operation(summary = "Recuperar evento", description = "Recuperar un evento con id", tags = "GET")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Se encontraron eventos") })
-	@GetMapping(produces = "application/json", path = "/eventos/{id}")
+	@GetMapping(produces = "application/json", path = "/eventos/{id}/")
 	public ResponseEntity<DTOEVentoResponse> recuperarEvento(
-			@Parameter(description = "Id del evento") @PathVariable Long idEvento) {
-		return ResponseEntity.ok(servicio.buscarEvento(idEvento));
+			@Parameter(description = "Id del evento") @PathVariable Long id) {
+		return ResponseEntity.ok(servicio.buscarEvento(id));
 	}
 	
 	
