@@ -82,3 +82,7 @@ Versiones:
 0.0.14: Nuevo:
 
 			Creado metodo para devolver datos de un evento en controlador de eventos.
+
+0.0.15: Nuevo:
+
+			Cambiado metodo para dar de alta los eventos.

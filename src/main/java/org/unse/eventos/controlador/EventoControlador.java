@@ -53,8 +53,8 @@ public class EventoControlador {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Evento cargado"),
 			@ApiResponse(responseCode = "400", description = "No se debe cargar un evento con id") })
 	@PostMapping(produces = "application/json", consumes = "application/json", path = "/eventos/alta/")
-	public ResponseEntity<Evento> altaEvento(
-			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del evento a registrar") @RequestBody Evento e) {
+	public ResponseEntity<DTOEVentoResponse> altaEvento(
+			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del evento a registrar") @RequestBody DTOEVentoResponse e) {
 		switch (servicio.altaEvento(e)) {
 		case 1:
 			return ResponseEntity.ok().build();

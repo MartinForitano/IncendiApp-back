@@ -1,6 +1,8 @@
 package org.unse.eventos.servicio;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -99,9 +101,18 @@ public class EventoServicio {
 	 * 2 Si el evento recibido tiene id (no deberia tener id en alta).
 	 */
 
-	public Integer altaEvento(Evento e) {
+	public Integer altaEvento(DTOEVentoResponse e) {
 		if (e.getId() == null) {
-			repositorio.save(e);
+			//crear un evento con los datos del DTO y grabar
+			LocalDateTime ti, tf;
+			Date di, df;
+			di = new Date(e.getTiempoInicio());
+			df = new Date(e.getTiempoFin());
+			System.out.println(di.toString() + df.toString());
+			ti = di.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+			tf = Instant.ofEpochMilli(e.getTiempoFin()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+			Evento evento = new Evento(null, e.getTipo(), e.getCantVictimas(), e.getAutoridades(), e.getAreaInfluencia(), e.getUbicacionEvento(), ti, tf, e.getUbiLatitud(), e.getUbiLongitud());
+			repositorio.save(evento);
 			return 1;
 		} else {
 			return 2;
