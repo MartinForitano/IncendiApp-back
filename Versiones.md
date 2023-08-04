@@ -86,3 +86,7 @@ Versiones:
 0.0.15: Nuevo:
 
 			Cambiado metodo para dar de alta los eventos.
+			
+0.0.16: Corregido:
+
+			Cambiado metodo para cambiar de datos del evento.

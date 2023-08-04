@@ -3,6 +3,7 @@ package org.unse.eventos.controlador;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.unse.eventos.entidad.DTOEVentoResponse;
 import org.unse.eventos.entidad.DTOListadoGeneral;
@@ -81,8 +83,8 @@ public class EventoControlador {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Datos actualizados"),
 			@ApiResponse(responseCode = "404", description = "Evento no encontrado")})
 	@PutMapping(produces = "application/json", consumes = "application/json", path = "/eventos/actualizacion/")
-	public ResponseEntity<Usuario> cambiarContraseniaUsuario(
-			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del evento para actualizar") @RequestBody Evento e) {
+	public ResponseEntity<DTOEVentoResponse> cambiarContraseniaUsuario(
+			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del evento para actualizar") @RequestBody DTOEVentoResponse e) {
 		switch (servicio.cambiarDatosEvento(e)) {
 		case 1:
 			return ResponseEntity.ok().build();

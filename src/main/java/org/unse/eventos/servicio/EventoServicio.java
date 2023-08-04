@@ -108,7 +108,6 @@ public class EventoServicio {
 			Date di, df;
 			di = new Date(e.getTiempoInicio());
 			df = new Date(e.getTiempoFin());
-			System.out.println(di.toString() + df.toString());
 			ti = di.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 			tf = Instant.ofEpochMilli(e.getTiempoFin()).atZone(ZoneId.systemDefault()).toLocalDateTime();
 			Evento evento = new Evento(null, e.getTipo(), e.getCantVictimas(), e.getAutoridades(), e.getAreaInfluencia(), e.getUbicacionEvento(), ti, tf, e.getUbiLatitud(), e.getUbiLongitud());
@@ -141,14 +140,19 @@ public class EventoServicio {
 	 * 2 Si el evento no existe.
 	 */
 
-	public Integer cambiarDatosEvento(Evento e) {
-		Optional<Evento> eDb = repositorio.findById(e.getId());
+	public Integer cambiarDatosEvento(DTOEVentoResponse e) {
+		Date di,df;
+	Optional<Evento> eDb = repositorio.findById(e.getId());
 		if (eDb.isPresent()) {
+			di = new Date(e.getTiempoInicio());
+			df = new Date(e.getTiempoFin());
 			eDb.get().setAreaInfluencia(e.getAreaInfluencia());
 			eDb.get().setAutoridades(e.getAutoridades());
 			eDb.get().setCantVictimas(e.getCantVictimas());
-			eDb.get().setTiempoInicio(e.getTiempoInicio());
-			eDb.get().setTiempoFin(e.getTiempoFin());
+			eDb.get().setTiempoInicio(LocalDateTime.of(di.getYear(), di.getMonth(),di.getDay(), di.getHours(), di.getMinutes()));
+			eDb.get().setTiempoFin(LocalDateTime.of(df.getYear(), df.getMonth(),df.getDay(), df.getHours(), df.getMinutes()));
+			//eDb.get().setTiempoInicio(Instant.ofEpochMilli(e.getTiempoInicio()).atZone(ZoneId.systemDefault()).toLocalDateTime());
+			//eDb.get().setTiempoFin(Instant.ofEpochMilli(e.getTiempoFin()).atZone(ZoneId.systemDefault()).toLocalDateTime());
 			eDb.get().setTipo(e.getTipo());
 			eDb.get().setUbicacionEvento(e.getUbicacionEvento());
 			eDb.get().setUbiLatitud(e.getUbiLatitud());
