@@ -70,8 +70,8 @@ public class EventoControlador {
 	@Operation(summary = "Baja de evento", description = "Borrar datos de un evento usando su ID", tags = "DELETE")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Evento borrado"),
 			@ApiResponse(responseCode = "404", description = "Evento no existente") })
-	@DeleteMapping("/eventos/baja/{id}")
-	public ResponseEntity<Evento> bajaEvento(@Parameter(description = "ID del evento a borrar") @PathVariable Long id) {
+	@DeleteMapping("/eventos/baja/{id}/")
+	public ResponseEntity<DTOEVentoResponse> bajaEvento(@Parameter(description = "ID del evento a borrar") @PathVariable Long id) {
 		if (servicio.borrarEvento(id) == 1) {
 			return ResponseEntity.ok().build();
 		}else {

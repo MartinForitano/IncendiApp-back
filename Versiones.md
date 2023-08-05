@@ -90,3 +90,7 @@ Versiones:
 0.0.16: Corregido:
 
 			Cambiado metodo para cambiar de datos del evento.
+			
+0.0.17: Corregido:
+
+			Cambiado metodo para eliminar eventos.
