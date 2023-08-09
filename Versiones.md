@@ -94,3 +94,7 @@ Versiones:
 0.0.17: Corregido:
 
 			Cambiado metodo para eliminar eventos.
+			
+0.0.18: Nuevo:
+
+			Agregado metodo para filtrar eventos en curso

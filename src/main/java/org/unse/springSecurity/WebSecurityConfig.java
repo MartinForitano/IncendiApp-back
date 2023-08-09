@@ -35,6 +35,8 @@ public class WebSecurityConfig {
 				.permitAll()
 				.requestMatchers(HttpMethod.GET, "/eventos/listado/general/")
 				.permitAll()
+				.requestMatchers(HttpMethod.GET, "/eventos/listado/generalencurso/")
+				.permitAll()
 				.requestMatchers(HttpMethod.GET, "/eventos/listado/filtrado")
 				.permitAll()
 				.requestMatchers(HttpMethod.GET, "/eventos/{id}/")

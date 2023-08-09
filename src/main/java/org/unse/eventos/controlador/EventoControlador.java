@@ -103,6 +103,12 @@ public class EventoControlador {
 		return ResponseEntity.ok(servicio.buscarEvento(id));
 	}
 	
+	@Operation(summary = "Listado eventos en curso", description = "Listado general de eventos en curso", tags = "GET")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Se encontraron eventos") })
+	@GetMapping(produces = "application/json", path = "/eventos/listado/generalencurso/")
+	public ResponseEntity<DTOListadoGeneral> listaEventosEnCurso() {
+		return ResponseEntity.ok(servicio.listaEventosEnCurso());
+	}
 	
 	
 }
