@@ -2,7 +2,11 @@ package org.unse.eventos.entidad;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,10 +30,11 @@ public class Evento {
 	private LocalDateTime tiempoFin;
 	private String ubiLatitud;
 	private String ubiLongitud;
+	private Boolean esVerificado = true;
 	
 	public Evento(Long id, String tipo, Integer cantVictimas, String[] autoridades, String areaInfluencia,
 			String ubicacionEvento, LocalDateTime tiempoInicio, LocalDateTime tiempoFin, String ubiLatitud,
-			String ubiLongitud) {
+			String ubiLongitud, Boolean esverificado) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -41,6 +46,7 @@ public class Evento {
 		this.tiempoFin = tiempoFin;
 		this.ubiLatitud = ubiLatitud;
 		this.ubiLongitud = ubiLongitud;
+		this.esVerificado = esverificado;
 	}
 	
 	public Evento() {
@@ -125,6 +131,14 @@ public class Evento {
 
 	public void setUbiLongitud(String ubiLongitud) {
 		this.ubiLongitud = ubiLongitud;
+	}
+
+	public Boolean getEsVerificado() {
+		return esVerificado;
+	}
+
+	public void setEsVerificado(Boolean esVerificado) {
+		this.esVerificado = esVerificado;
 	}
 		
 }

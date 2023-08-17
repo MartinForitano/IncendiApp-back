@@ -12,9 +12,10 @@ public class DTOEVentoResponse {
 	private Long tiempoFin;
 	private String ubiLatitud;
 	private String ubiLongitud;
+	private Boolean esVerificado;
 	
 	public DTOEVentoResponse(Long id, String tipo, Integer cantVictimas, String[] autoridades, String areaInfluencia,
-			String ubicacionEvento, Long tiempoInicio, Long tiempoFin, String ubiLatitud, String ubiLongitud) {
+			String ubicacionEvento, Long tiempoInicio, Long tiempoFin, String ubiLatitud, String ubiLongitud, Boolean esverificado) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -26,6 +27,7 @@ public class DTOEVentoResponse {
 		this.tiempoFin = tiempoFin;
 		this.ubiLatitud = ubiLatitud;
 		this.ubiLongitud = ubiLongitud;
+		this.esVerificado = esverificado;
 	}
 	public Long getId() {
 		return id;
@@ -86,6 +88,12 @@ public class DTOEVentoResponse {
 	}
 	public void setUbiLongitud(String ubiLongitud) {
 		this.ubiLongitud = ubiLongitud;
+	}
+	public Boolean getEsVerificado() {
+		return esVerificado;
+	}
+	public void setEsVerificado(Boolean esVerificado) {
+		this.esVerificado = esVerificado;
 	}
 	
 }

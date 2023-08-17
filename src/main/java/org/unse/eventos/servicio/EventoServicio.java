@@ -28,7 +28,7 @@ public class EventoServicio {
 
 	public DTOListadoGeneral listaEventosGral() {
 		DTOListadoGeneral respuesta;
-		DTOEVentoResponse e;
+		DTOEVentoResponse e = null;
 		List<DTOEVentoResponse> listaEventosRespuesta = new ArrayList<>();
 		List<Evento> listaGralVanilla = repositorio.findAll();
 		for (int i = 0; i < listaGralVanilla.size(); i++) {
@@ -36,9 +36,9 @@ public class EventoServicio {
 			TI =  new Date(listaGralVanilla.get(i).getTiempoInicio().getYear(), listaGralVanilla.get(i).getTiempoInicio().getMonthValue(), listaGralVanilla.get(i).getTiempoInicio().getDayOfMonth(), listaGralVanilla.get(i).getTiempoInicio().getHour(), listaGralVanilla.get(i).getTiempoInicio().getMinute());
 			if(listaGralVanilla.get(i).getTiempoFin() != null) {
 			TF = new Date(listaGralVanilla.get(i).getTiempoFin().getYear(), listaGralVanilla.get(i).getTiempoFin().getMonthValue(), listaGralVanilla.get(i).getTiempoFin().getDayOfMonth(), listaGralVanilla.get(i).getTiempoFin().getHour(), listaGralVanilla.get(i).getTiempoFin().getMinute());
-			e = new DTOEVentoResponse(listaGralVanilla.get(i).getId(), listaGralVanilla.get(i).getTipo() , listaGralVanilla.get(i).getCantVictimas(), listaGralVanilla.get(i).getAutoridades(), listaGralVanilla.get(i).getAreaInfluencia(), listaGralVanilla.get(i).getUbicacionEvento(), TI.getTime(), TF.getTime(), listaGralVanilla.get(i).getUbiLatitud(), listaGralVanilla.get(i).getUbiLongitud());
+			e = new DTOEVentoResponse(listaGralVanilla.get(i).getId(), listaGralVanilla.get(i).getTipo() , listaGralVanilla.get(i).getCantVictimas(), listaGralVanilla.get(i).getAutoridades(), listaGralVanilla.get(i).getAreaInfluencia(), listaGralVanilla.get(i).getUbicacionEvento(), TI.getTime(), TF.getTime(), listaGralVanilla.get(i).getUbiLatitud(), listaGralVanilla.get(i).getUbiLongitud(), listaGralVanilla.get(i).getEsVerificado());
 			}else {
-			e = new DTOEVentoResponse(listaGralVanilla.get(i).getId(), listaGralVanilla.get(i).getTipo() , listaGralVanilla.get(i).getCantVictimas(), listaGralVanilla.get(i).getAutoridades(), listaGralVanilla.get(i).getAreaInfluencia(), listaGralVanilla.get(i).getUbicacionEvento(), TI.getTime(), null, listaGralVanilla.get(i).getUbiLatitud(), listaGralVanilla.get(i).getUbiLongitud());
+			e = new DTOEVentoResponse(listaGralVanilla.get(i).getId(), listaGralVanilla.get(i).getTipo() , listaGralVanilla.get(i).getCantVictimas(), listaGralVanilla.get(i).getAutoridades(), listaGralVanilla.get(i).getAreaInfluencia(), listaGralVanilla.get(i).getUbicacionEvento(), TI.getTime(), null, listaGralVanilla.get(i).getUbiLatitud(), listaGralVanilla.get(i).getUbiLongitud(), listaGralVanilla.get(i).getEsVerificado());
 			}
 			listaEventosRespuesta.add(e);
 		}
@@ -117,7 +117,7 @@ public class EventoServicio {
 				df = new Date(e.getTiempoFin());
 				tf = Instant.ofEpochMilli(e.getTiempoFin()).atZone(ZoneId.systemDefault()).toLocalDateTime();
 			}
-			Evento evento = new Evento(null, e.getTipo(), e.getCantVictimas(), e.getAutoridades(), e.getAreaInfluencia(), e.getUbicacionEvento(), ti, tf, e.getUbiLatitud(), e.getUbiLongitud());
+			Evento evento = new Evento(null, e.getTipo(), e.getCantVictimas(), e.getAutoridades(), e.getAreaInfluencia(), e.getUbicacionEvento(), ti, tf, e.getUbiLatitud(), e.getUbiLongitud(), e.getEsVerificado());
 			repositorio.save(evento);
 			return 1;
 		} else {
@@ -155,10 +155,10 @@ public class EventoServicio {
 			eDb.get().setAreaInfluencia(e.getAreaInfluencia());
 			eDb.get().setAutoridades(e.getAutoridades());
 			eDb.get().setCantVictimas(e.getCantVictimas());
-			eDb.get().setTiempoInicio(LocalDateTime.of(di.getYear(), di.getMonth(),di.getDay(), di.getHours(), di.getMinutes()));
+			eDb.get().setTiempoInicio(LocalDateTime.of(di.getYear(), di.getMonth(),di.getDate(), di.getHours(), di.getMinutes()));
 			if(e.getTiempoFin() != null) {
 			df = new Date(e.getTiempoFin());
-			eDb.get().setTiempoFin(LocalDateTime.of(df.getYear(), df.getMonth(),df.getDay(), df.getHours(), df.getMinutes()));
+			eDb.get().setTiempoFin(LocalDateTime.of(df.getYear(), df.getMonth(),df.getDate(), df.getHours(), df.getMinutes()));
 			}else {
 				eDb.get().setTiempoFin(null);
 			}
@@ -168,6 +168,7 @@ public class EventoServicio {
 			eDb.get().setUbicacionEvento(e.getUbicacionEvento());
 			eDb.get().setUbiLatitud(e.getUbiLatitud());
 			eDb.get().setUbiLongitud(e.getUbiLongitud());
+			eDb.get().setEsVerificado(e.getEsVerificado());
 			repositorio.save(eDb.get());
 			return 1;
 		}else {
@@ -180,9 +181,9 @@ public class EventoServicio {
 		Optional<Evento> eDb = repositorio.findById(idEvento);
 		if (eDb.isPresent()) {
 			if(eDb.get().getTiempoFin()!=null) {
-			response = new DTOEVentoResponse(eDb.get().getId(), eDb.get().getTipo(), eDb.get().getCantVictimas(), eDb.get().getAutoridades(), eDb.get().getAreaInfluencia(), eDb.get().getUbicacionEvento(), new Date(eDb.get().getTiempoInicio().getYear(), eDb.get().getTiempoInicio().getMonthValue(), eDb.get().getTiempoInicio().getDayOfMonth(), eDb.get().getTiempoInicio().getHour(), eDb.get().getTiempoInicio().getMinute()).getTime(), new Date(eDb.get().getTiempoFin().getYear(), eDb.get().getTiempoFin().getMonthValue(), eDb.get().getTiempoFin().getDayOfMonth(), eDb.get().getTiempoFin().getHour(), eDb.get().getTiempoFin().getMinute()).getTime(), eDb.get().getUbiLatitud(), eDb.get().getUbiLongitud());
+			response = new DTOEVentoResponse(eDb.get().getId(), eDb.get().getTipo(), eDb.get().getCantVictimas(), eDb.get().getAutoridades(), eDb.get().getAreaInfluencia(), eDb.get().getUbicacionEvento(), new Date(eDb.get().getTiempoInicio().getYear(), eDb.get().getTiempoInicio().getMonthValue(), eDb.get().getTiempoInicio().getDayOfMonth(), eDb.get().getTiempoInicio().getHour(), eDb.get().getTiempoInicio().getMinute()).getTime(), new Date(eDb.get().getTiempoFin().getYear(), eDb.get().getTiempoFin().getMonthValue(), eDb.get().getTiempoFin().getDayOfMonth(), eDb.get().getTiempoFin().getHour(), eDb.get().getTiempoFin().getMinute()).getTime(), eDb.get().getUbiLatitud(), eDb.get().getUbiLongitud(), eDb.get().getEsVerificado());
 			}else {
-				response = new DTOEVentoResponse(eDb.get().getId(), eDb.get().getTipo(), eDb.get().getCantVictimas(), eDb.get().getAutoridades(), eDb.get().getAreaInfluencia(), eDb.get().getUbicacionEvento(), new Date(eDb.get().getTiempoInicio().getYear(), eDb.get().getTiempoInicio().getMonthValue(), eDb.get().getTiempoInicio().getDayOfMonth(), eDb.get().getTiempoInicio().getHour(), eDb.get().getTiempoInicio().getMinute()).getTime(), null, eDb.get().getUbiLatitud(), eDb.get().getUbiLongitud());
+				response = new DTOEVentoResponse(eDb.get().getId(), eDb.get().getTipo(), eDb.get().getCantVictimas(), eDb.get().getAutoridades(), eDb.get().getAreaInfluencia(), eDb.get().getUbicacionEvento(), new Date(eDb.get().getTiempoInicio().getYear(), eDb.get().getTiempoInicio().getMonthValue(), eDb.get().getTiempoInicio().getDayOfMonth(), eDb.get().getTiempoInicio().getHour(), eDb.get().getTiempoInicio().getMinute()).getTime(), null, eDb.get().getUbiLatitud(), eDb.get().getUbiLongitud(), eDb.get().getEsVerificado());
 			}
 			return response;
 		}else {
@@ -197,7 +198,7 @@ public class EventoServicio {
 		List<Evento> listaGralVanilla = repositorio.buscarEventosEnCurso();
 		for (int i = 0; i < listaGralVanilla.size(); i++) {
 			Date TI =  new Date(listaGralVanilla.get(i).getTiempoInicio().getYear(), listaGralVanilla.get(i).getTiempoInicio().getMonthValue(), listaGralVanilla.get(i).getTiempoInicio().getDayOfMonth(), listaGralVanilla.get(i).getTiempoInicio().getHour(), listaGralVanilla.get(i).getTiempoInicio().getMinute());
-			e = new DTOEVentoResponse(listaGralVanilla.get(i).getId(), listaGralVanilla.get(i).getTipo() , listaGralVanilla.get(i).getCantVictimas(), listaGralVanilla.get(i).getAutoridades(), listaGralVanilla.get(i).getAreaInfluencia(), listaGralVanilla.get(i).getUbicacionEvento(), TI.getTime(), null, listaGralVanilla.get(i).getUbiLatitud(), listaGralVanilla.get(i).getUbiLongitud());
+			e = new DTOEVentoResponse(listaGralVanilla.get(i).getId(), listaGralVanilla.get(i).getTipo() , listaGralVanilla.get(i).getCantVictimas(), listaGralVanilla.get(i).getAutoridades(), listaGralVanilla.get(i).getAreaInfluencia(), listaGralVanilla.get(i).getUbicacionEvento(), TI.getTime(), null, listaGralVanilla.get(i).getUbiLatitud(), listaGralVanilla.get(i).getUbiLongitud(), listaGralVanilla.get(i).getEsVerificado());
 			listaEventosRespuesta.add(e);
 		}
 		respuesta = new DTOListadoGeneral("Ok", listaEventosRespuesta);

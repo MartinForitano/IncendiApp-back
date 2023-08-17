@@ -97,4 +97,13 @@ Versiones:
 			
 0.0.18: Nuevo:
 
-			Agregado metodo para filtrar eventos en curso
+			Agregado metodo para filtrar eventos en curso.
+			
+0.0.19: Corregido:
+
+			Errores en modificacion de evento, corregido errores en alta de eventos.
+			
+0.0.19: Nuevo:
+
+			Agregado campo de evento verificado a la entidad evento, modificados endpoints para adaptar este nuevo campo.
+			
