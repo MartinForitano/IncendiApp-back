@@ -107,3 +107,13 @@ Versiones:
 
 			Agregado campo de evento verificado a la entidad evento, modificados endpoints para adaptar este nuevo campo.
 			
+0.0.19: Nuevo:
+
+			Agregado campo de evento verificado a la entidad evento, modificados endpoints para adaptar este nuevo campo.
+			
+0.0.20: Corregido:
+
+			Ahora se devolvera los eventos verificados ademas de en curso, en el listado de eventos en curso.
+			
+			
+			
