@@ -28,13 +28,13 @@ public class Evento {
 	private String ubicacionEvento;
 	private LocalDateTime tiempoInicio;
 	private LocalDateTime tiempoFin;
-	private String ubiLatitud;
-	private String ubiLongitud;
+	private Double ubiLatitud;
+	private Double ubiLongitud;
 	private Boolean esVerificado = true;
 	
 	public Evento(Long id, String tipo, Integer cantVictimas, String[] autoridades, String areaInfluencia,
-			String ubicacionEvento, LocalDateTime tiempoInicio, LocalDateTime tiempoFin, String ubiLatitud,
-			String ubiLongitud, Boolean esverificado) {
+			String ubicacionEvento, LocalDateTime tiempoInicio, LocalDateTime tiempoFin, Double ubiLatitud,
+			Double ubiLongitud, Boolean esverificado) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -117,19 +117,19 @@ public class Evento {
 		this.tiempoFin = tiempoFin;
 	}
 
-	public String getUbiLatitud() {
+	public Double getUbiLatitud() {
 		return ubiLatitud;
 	}
 
-	public void setUbiLatitud(String ubiLatitud) {
+	public void setUbiLatitud(Double ubiLatitud) {
 		this.ubiLatitud = ubiLatitud;
 	}
 
-	public String getUbiLongitud() {
+	public Double getUbiLongitud() {
 		return ubiLongitud;
 	}
 
-	public void setUbiLongitud(String ubiLongitud) {
+	public void setUbiLongitud(Double ubiLongitud) {
 		this.ubiLongitud = ubiLongitud;
 	}
 
