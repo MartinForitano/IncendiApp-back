@@ -110,9 +110,9 @@ public class EventoControlador {
 		return ResponseEntity.ok(servicio.listadoEventosEnCurso());
 	}
 	
-	@Operation(summary = "Listado eventos verificados", description = "Listado general de eventos verificados", tags = "GET")
+	@Operation(summary = "Listado general verificados", description = "Listado general de eventos verificados", tags = "GET")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Se encontraron eventos") })
-	@GetMapping(produces = "application/json", path = "/eventos/listado/generalverificados/")
+	@GetMapping(produces = "application/json", path = "/eventos/listado/verificados/")
 	public ResponseEntity<DTOListadoGeneral> listaEventosVerificados() {
 		return ResponseEntity.ok(servicio.listadoEventosVerificados());
 	}
@@ -121,6 +121,7 @@ public class EventoControlador {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Se encontraron eventos") })
 	@GetMapping(produces = "application/json", path = "/eventos/listado/generalencursosinverificar/")
 	public ResponseEntity<DTOListadoGeneral> listaEnCursoSinVerificar() {
+
 		return ResponseEntity.ok(servicio.listadoEventosEnCursoSinVerificar());
 	}
 }

@@ -29,14 +29,12 @@ public interface EventosRepositorio extends JpaRepository<Evento, Long> {
 	@Query("select e from Evento e where e.ubicacionEvento like %?1% and e.tipo = ?2")
 	List<Evento> buscarPorUbicacionYTipo(String ubicacion, String tipo);
 
-	//buscar eventos en curso y verificados
 	@Query("select e from Evento e where e.tiempoFin = null and e.esVerificado = true")
 	List<Evento> buscarEventosEnCurso();
 	
-	@Query("select e from Evento e where e.esVerificado = true")
+	@Query("select e from Evento e where esVerificado = true")
 	List<Evento> buscarEventosVerificados();
 	
-	//buscar eventos en curso y sin verificar
 	@Query("select e from Evento e where e.tiempoFin = null and e.esVerificado = false")
 	List<Evento> buscarEventosEnCursoSinVerificar();
 }

@@ -115,5 +115,9 @@ Versiones:
 
 			Ahora se devolvera los eventos verificados ademas de en curso, en el listado de eventos en curso.
 			
+0.0.21: Nuevo:
+
+			Agregados metodos para devolver eventos en curso sin verificar y eventos verificados en general.
+			
 			
 			

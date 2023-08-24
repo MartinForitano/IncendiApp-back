@@ -215,6 +215,7 @@ public class EventoServicio {
 			e = new DTOEVentoResponse(listaGralVanilla.get(i).getId(), listaGralVanilla.get(i).getTipo() , listaGralVanilla.get(i).getCantVictimas(), listaGralVanilla.get(i).getAutoridades(), listaGralVanilla.get(i).getAreaInfluencia(), listaGralVanilla.get(i).getUbicacionEvento(), TI.getTime(), null, listaGralVanilla.get(i).getUbiLatitud(), listaGralVanilla.get(i).getUbiLongitud(), listaGralVanilla.get(i).getEsVerificado());
 			listaEventosRespuesta.add(e);
 		}
+
 		respuesta = new DTOListadoGeneral("Ok", listaEventosRespuesta);
 		return respuesta;
 	}
