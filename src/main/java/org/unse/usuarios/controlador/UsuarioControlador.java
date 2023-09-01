@@ -34,7 +34,7 @@ public class UsuarioControlador {
 	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/alta/")
 	public ResponseEntity<Usuario> altaUsuario(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario a registrar") @RequestBody DTOusuario u) {
-		switch (servicio.altaUsuario(new Usuario(null, u.getContrasenia(), u.getNombre()))) {
+		switch (servicio.altaUsuario(new Usuario(null, u.getContrasenia(), u.getNombre(), 0))) {
 		case 1:
 			return ResponseEntity.ok().build();
 		case 2:
@@ -53,7 +53,7 @@ public class UsuarioControlador {
 	@DeleteMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/baja/")
 	public ResponseEntity<Usuario> bajaUsuario(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario a eliminar") @RequestBody DTOusuario u) {
-		switch (servicio.borrarUsuario(new Usuario(null, u.getContrasenia(), u.getNombre()))) {
+		switch (servicio.borrarUsuario(new Usuario(null, u.getContrasenia(), u.getNombre(), u.getTipousuario()))) {
 		case 1:
 			return ResponseEntity.ok().build();
 		case 2:
@@ -71,11 +71,22 @@ public class UsuarioControlador {
 	@PutMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/actualizar/contrasenia/")
 	public ResponseEntity<Usuario> cambiarContraseniaUsuario(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario para cambiar contraseña") @RequestBody DTOusuario u) {
-		switch (servicio.cambiarContraseniaUsuario(new Usuario(null, u.getContrasenia(), u.getNombre()))) {
+		switch (servicio.cambiarContraseniaUsuario(new Usuario(null, u.getContrasenia(), u.getNombre(), null))) {
 		case 1:
 			return ResponseEntity.ok().build();
 		default:
 			return ResponseEntity.internalServerError().build();
 		}
 	}
-}
+	
+	@Operation(summary = "Obtener tipo", description = "Obtener tipo de usuario registrado", tags = "PUT")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Tipo obtenido"),
+			@ApiResponse(responseCode = "500", description = "Error interno del servidor")})
+	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/tipousuario/")
+	public ResponseEntity<Usuario> obtenerTipoUsuario(
+			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario para obtener tipo") @RequestBody DTOusuario u) {
+		 return ResponseEntity.ok(servicio.obtenerTipoUsuario(new Usuario(null, u.getContrasenia(), u.getNombre(), null)));
+		}
+	}
+
+

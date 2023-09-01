@@ -25,12 +25,15 @@ public class Usuario implements UserDetails{
 	private String contrasenia;
 	
 	private String nombre;
+	
+	private Integer tipoUsuario;
 
-	public Usuario(Long id, String contrasenia, String nombre) {
+	public Usuario(Long id, String contrasenia, String nombre, Integer tipousuario) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.contrasenia = contrasenia;
+		this.tipoUsuario = tipousuario;
 	}
 	
 	public Usuario() {
@@ -73,6 +76,14 @@ public class Usuario implements UserDetails{
 	@Override
 	public String getUsername() {
 		return this.nombre;
+	}
+
+	public Integer getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(Integer tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 	@Override

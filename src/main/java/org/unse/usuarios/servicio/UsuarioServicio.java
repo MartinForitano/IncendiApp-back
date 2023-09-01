@@ -63,6 +63,16 @@ public class UsuarioServicio {
 		}
 	}
 
+	public Usuario obtenerTipoUsuario(Usuario u) {
+		u.setNombre(desencriptarContrasenia(u.getNombre()));
+		u.setTipoUsuario(repositorio.buscarTipo(u.getNombre()));
+		u.setNombre(null);
+		u.setContrasenia(null);
+		u.setId(null);
+		return u;
+	}
+	
+	
 	/*
 	 * RETORNA un entero: 1 Si el usuario existe y es la contraseña correcta, se
 	 * cambia la contraseña.
@@ -125,4 +135,4 @@ public class UsuarioServicio {
         }
     }
 	
-	}
+}

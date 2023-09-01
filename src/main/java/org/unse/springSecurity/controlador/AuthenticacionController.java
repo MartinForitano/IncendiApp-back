@@ -45,7 +45,7 @@ public class AuthenticacionController {
 	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/login/")
 	public ResponseEntity<DTOToken> login(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario") @RequestBody datosLogin u) {
-		return autenticarUsuario(new Usuario(null, u.getContrasenia(), u.getNombre()));
+		return autenticarUsuario(new Usuario(null, u.getContrasenia(), u.getNombre(), null));
 
 	}
 
