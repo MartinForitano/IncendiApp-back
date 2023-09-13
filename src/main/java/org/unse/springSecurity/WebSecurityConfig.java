@@ -41,6 +41,8 @@ public class WebSecurityConfig {
 				.permitAll()
 				.requestMatchers(HttpMethod.GET, "/eventos/{id}/")
 				.permitAll()
+				.requestMatchers(HttpMethod.POST, "/eventos/alta/botonantipanico/")
+				.permitAll()
 				.requestMatchers("/documentacion/**", "/v3/api-docs/**","/v3/api-docs.yaml")
 				.permitAll()
 				.anyRequest()

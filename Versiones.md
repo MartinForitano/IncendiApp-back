@@ -119,5 +119,8 @@ Versiones:
 
 			Agregados metodos para devolver eventos en curso sin verificar y eventos verificados en general.
 			
+0.0.22: Nuevo:
+
+			Agregado metodo para agregar un evento de boton antipanico que bypassea spring security.
 			
 			

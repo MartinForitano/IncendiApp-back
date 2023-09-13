@@ -124,4 +124,20 @@ public class EventoControlador {
 
 		return ResponseEntity.ok(servicio.listadoEventosEnCursoSinVerificar());
 	}
+	
+	@Operation(summary = "Alta de evento boton antipanico", description = "Alta de los datos de un evento tipo antipanico", tags = "POST")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Evento cargado"),
+			@ApiResponse(responseCode = "400", description = "No se debe cargar un evento con id") })
+	@PostMapping(produces = "application/json", consumes = "application/json", path = "/eventos/alta/botonantipanico/")
+	public ResponseEntity<DTOEVentoResponse> altaEventoBotonAntipanico(
+			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del evento a registrar") @RequestBody DTOEVentoResponse e) {
+		switch (servicio.altaEvento(e)) {
+		case 1:
+			return ResponseEntity.ok().build();
+		case 2:
+			return ResponseEntity.badRequest().build();
+		default:
+			return ResponseEntity.internalServerError().build();
+		}
+	}
 }
