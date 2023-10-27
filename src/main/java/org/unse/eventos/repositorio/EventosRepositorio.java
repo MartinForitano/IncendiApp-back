@@ -37,4 +37,7 @@ public interface EventosRepositorio extends JpaRepository<Evento, Long> {
 	
 	@Query("select e from Evento e where e.tiempoFin = null and e.esVerificado = false")
 	List<Evento> buscarEventosEnCursoSinVerificar();
+	
+	@Query("select e from Evento e where e.tiempoFin != null")
+	List<Evento> buscarEventosFinalizados();
 }

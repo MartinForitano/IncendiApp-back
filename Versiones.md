@@ -123,4 +123,8 @@ Versiones:
 
 			Agregado metodo para agregar un evento de boton antipanico que bypassea spring security.
 			
+0.0.23: Nuevo:
+
+			Agregado listado para filtrar eventos finalizados.
+			
 			

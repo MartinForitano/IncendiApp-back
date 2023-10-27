@@ -140,4 +140,12 @@ public class EventoControlador {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
+	
+	@Operation(summary = "Listado de eventos finalizados", description = "Listado general de eventos finalizados", tags = "GET")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Se encontraron eventos") })
+	@GetMapping(produces = "application/json", path = "/eventos/listado/finalizados/")
+	public ResponseEntity<DTOListadoGeneral> listaEventosFinalizados() {
+		return ResponseEntity.ok(servicio.buscarFinalizados());
+	}
+	
 }
