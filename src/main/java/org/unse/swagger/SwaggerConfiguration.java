@@ -12,7 +12,7 @@ import io.swagger.v3.oas.models.info.License;
 public class SwaggerConfiguration {
 	@Bean
 	public OpenAPI openApiConfiguration() {
-		return new OpenAPI().info(new Info().title("IncendiApp - Api").version("0.0.23")
+		return new OpenAPI().info(new Info().title("IncendiApp - Api").version("0.0.24")
 				.description("IncendiApp API documentation using Open APi & Spring Doc")
 				.termsOfService("http:/swagger.io/terms/")
 				.license(new License().name("MIT / Apache 2.0").url("http://springdoc.org"))

@@ -34,7 +34,7 @@ public class UsuarioControlador {
 	@PostMapping(produces = "application/json", consumes = "application/json", path = "/usuarios/alta/")
 	public ResponseEntity<Usuario> altaUsuario(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del usuario a registrar") @RequestBody DTOusuario u) {
-		switch (servicio.altaUsuario(new Usuario(null, u.getContrasenia(), u.getNombre(), 0))) {
+		switch (servicio.altaUsuario(new Usuario(null, u.getContrasenia(), u.getNombre(), 2))) {
 		case 1:
 			return ResponseEntity.ok().build();
 		case 2:

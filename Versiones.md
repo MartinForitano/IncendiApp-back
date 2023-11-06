@@ -127,4 +127,6 @@ Versiones:
 
 			Agregado listado para filtrar eventos finalizados.
 			
-			
+0.0.24: Nuevo:
+
+			Agregado nuevo tipo de usuario, 2 = usuario basico registrado.
