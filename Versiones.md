@@ -130,3 +130,7 @@ Versiones:
 0.0.24: Nuevo:
 
 			Agregado nuevo tipo de usuario, 2 = usuario basico registrado.
+			
+0.0.25: Nuevo:
+
+			Metodo para buscar por ubicacion de eventos.

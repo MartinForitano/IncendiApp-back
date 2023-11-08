@@ -248,4 +248,18 @@ public class EventoServicio {
 		return respuesta;
 	}
 	
+	public DTOListadoGeneral buscarPorUbicacion(String ubicacion) {
+		DTOListadoGeneral respuesta;
+		DTOEVentoResponse e;
+		List<DTOEVentoResponse> listaEventosRespuesta = new ArrayList<>();
+		List<Evento> listaGralVanilla = repositorio.buscarEventosPorUbicacion(ubicacion);
+		for (int i = 0; i < listaGralVanilla.size(); i++) {
+			Date TI =  new Date(listaGralVanilla.get(i).getTiempoInicio().getYear(), listaGralVanilla.get(i).getTiempoInicio().getMonthValue(), listaGralVanilla.get(i).getTiempoInicio().getDayOfMonth(), listaGralVanilla.get(i).getTiempoInicio().getHour(), listaGralVanilla.get(i).getTiempoInicio().getMinute());
+			e = new DTOEVentoResponse(listaGralVanilla.get(i).getId(), listaGralVanilla.get(i).getTipo() , listaGralVanilla.get(i).getCantVictimas(), listaGralVanilla.get(i).getAutoridades(), listaGralVanilla.get(i).getAreaInfluencia(), listaGralVanilla.get(i).getUbicacionEvento(), TI.getTime(), null, listaGralVanilla.get(i).getUbiLatitud(), listaGralVanilla.get(i).getUbiLongitud(), listaGralVanilla.get(i).getEsVerificado());
+			listaEventosRespuesta.add(e);
+		}
+		respuesta = new DTOListadoGeneral("Ok", listaEventosRespuesta);
+		return respuesta;
+	}
+	
 }

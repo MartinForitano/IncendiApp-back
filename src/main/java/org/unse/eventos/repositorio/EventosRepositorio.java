@@ -40,4 +40,8 @@ public interface EventosRepositorio extends JpaRepository<Evento, Long> {
 	
 	@Query("select e from Evento e where e.tiempoFin != null")
 	List<Evento> buscarEventosFinalizados();
+	
+	@Query("select e from Evento e where e.ubicacionEvento like %?1%")
+	List<Evento> buscarEventosPorUbicacion(String ubicacion);
+	
 }
