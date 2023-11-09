@@ -151,7 +151,7 @@ public class EventoControlador {
 	
 	@Operation(summary = "Listado de eventos por ubicacion", description = "Listado general de eventos filtrados por ubicacion", tags = "GET")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Se encontraron eventos") })
-	@GetMapping(produces = "application/json", path = "/eventos/listado/ubicacion/{ubicacion}")
+	@GetMapping(produces = "application/json", path = "/eventos/listado/ubicacion/{ubicacion}/")
 	public ResponseEntity<DTOListadoGeneral> listaEventosPorUbicacion(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Ubicacion del evento") @PathVariable String ubicacion) {
 		return ResponseEntity.ok(servicio.buscarPorUbicacion(ubicacion));
